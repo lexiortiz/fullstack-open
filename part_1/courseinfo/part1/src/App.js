@@ -1,77 +1,86 @@
 
 // Building Header Component
 const Header = (props) => {
-	return (
-		<h1>{props.course}</h1>
-	);
+  return (
+    <h1>{props.course}</h1>
+  );
 };
-
-const PartOne = (props) => {
-	return (
-		<p>
-        {props.part1} {props.exercises1}
-    </p>
-	);
-}
-
-const PartTwo = (props) => {
-	return (
-		<p>
-        {props.part2} {props.exercises2}
-    </p>
-	);
-}
-
-const PartThree = (props) => {
-	return (
-		<p>
-        {props.part3} {props.exercises3}
-    </p>
-	);
-}
 
 // Building Content Component
-const Content = (props) => {
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
-
-	return (
-		<div>
-			<PartOne part1={part1} exercises1={exercises1} />
-      <PartTwo part2={part2} exercises2={exercises2} />
-	    <PartThree part3={part3} exercises3={exercises3} />
-		</div>
-	);
+const Content = ({parts}) => {
+  return (
+    <div>
+      <PartOne part1={parts[0].name} exercises1={parts[0].exercises} />
+      <PartTwo part2={parts[1].name} exercises2={parts[1].exercises} />
+      <PartThree part3={parts[2].name} exercises3={parts[2].exercises} />
+    </div>
+  );
 };
+// PartOne for Content Component
+const PartOne = (props) => {
+  return (
+    <p>
+      {props.part1} {props.exercises1}
+    </p>
+  );
+}
+
+// PartTwo for Content Component
+const PartTwo = (props) => {
+  return (
+    <p>
+      {props.part2} {props.exercises2}
+    </p>
+  );
+}
+
+// PartThree for Content Component
+const PartThree = (props) => {
+  return (
+    <p>
+      {props.part3} {props.exercises3}
+    </p>
+  );
+}
 
 // Building Total Component
 const Total = (props) => {
-	return (
-		<div>
-			<p>Number of Exercises: {props.exercisesTotal}</p>
-		</div>
-	);
+  return (
+    <div>
+      <p>Number of Exercises: {props.exercisesTotal}</p>
+    </div>
+  );
 }
 
-// Building Application
+// ** Building Application **
 const App = () => {
   // Declaring Variables
-  const course = 'Half Stack application development'
-  const exercises1 = 10
-  const exercises2 = 7
-  const exercises3 = 14
+  const course = {
+    name: 'Half Stack Application Development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using Props to Pass Data',
+        exercises: 7
+      },
+      {
+        name: 'State of a Component',
+        exercises: 14
+      }
+    ]
+  }
 
-  // Returning Single Value of
+  // Returning Single Div of
+  // Returning Single Div of
   return (
-		// Components + Passing Props
+    // Components + Passing Props
     <div>
-      <Header course={course} />
-      <Content  />
-      <Total exercisesTotal={exercises1 + exercises2 + exercises3} />
+      <Header course={course.name} />
+      <Content parts={course.parts} />
+      <Total exercisesTotal={course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises} />
     </div>
   )
 }
